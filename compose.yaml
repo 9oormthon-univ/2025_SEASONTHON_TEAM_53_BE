@@ -5,7 +5,7 @@ services:
   taro:
     build:
       context: src
-      dockerfile: src/Dockerfile
+      dockerfile: Dockerfile
     container_name: taro-backend
     ports:
       - "8080:8080"
