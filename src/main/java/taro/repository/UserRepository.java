@@ -17,4 +17,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByRefreshToken(String refreshToken);
     
     boolean existsByEmail(String email);
+    
+    // 일반 로그인용 메서드 추가
+    Optional<User> findByLoginId(String loginId);
+    
+    boolean existsByLoginId(String loginId);
 }

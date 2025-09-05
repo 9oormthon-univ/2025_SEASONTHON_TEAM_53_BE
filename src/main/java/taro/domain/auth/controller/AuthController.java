@@ -2,11 +2,15 @@ package taro.domain.auth.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import taro.domain.auth.dto.LoginRequest;
+import taro.domain.auth.dto.RegisterRequest;
 import taro.domain.auth.dto.TokenRefreshRequest;
 import taro.domain.auth.dto.TokenResponse;
 import taro.domain.auth.service.AuthService;
@@ -20,6 +24,19 @@ import taro.security.CustomUserDetails;
 public class AuthController {
 
     private final AuthService authService;
+
+    @Operation(summary = "일반 회원가입", description = "아이디와 비밀번호로 회원가입합니다.")
+    @PostMapping("/register")
+    public ResponseEntity<Void> register(@Valid @RequestBody RegisterRequest request) {
+        authService.register(request);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @Operation(summary = "일반 로그인", description = "아이디와 비밀번호로 로그인합니다.")
+    @PostMapping("/login")
+    public ResponseEntity<TokenResponse> login(@Valid @RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authService.login(request));
+    }
 
     @Operation(summary = "토큰 갱신", description = "Refresh Token을 이용해 새로운 Access Token을 발급받습니다.")
     @PostMapping("/refresh")

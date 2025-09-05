@@ -22,7 +22,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    // 일반 로그인용 아이디 (LOCAL 계정만 사용)
+    @Column(unique = true)
+    private String loginId;
+
+    // 비밀번호 해시 (LOCAL 계정만 사용)
+    private String passwordHash;
+
+    @Column(unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -34,8 +41,8 @@ public class User {
     @Column(nullable = false)
     private SocialProvider socialProvider;
 
-    @Column(nullable = false, unique = true)
-    private String socialId; // 기존 kakaoId를 일반화
+    @Column(unique = true)
+    private String socialId; // 소셜 로그인 고유 ID (카카오 등)
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
