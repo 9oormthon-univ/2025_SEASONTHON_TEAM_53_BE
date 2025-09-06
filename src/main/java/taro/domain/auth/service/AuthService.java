@@ -82,6 +82,7 @@ public class AuthService {
         return TokenResponse.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
+                .needsTutorial(!user.isTutorialCompleted())
                 .build();
     }
 
@@ -112,6 +113,7 @@ public class AuthService {
         return TokenResponse.builder()
                 .accessToken(newAccessToken)
                 .refreshToken(newRefreshToken)
+                .needsTutorial(!user.isTutorialCompleted())
                 .build();
     }
 

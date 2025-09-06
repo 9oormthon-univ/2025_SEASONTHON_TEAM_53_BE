@@ -37,3 +37,8 @@ out/
 .vscode/
 
 .env
+
+### H2 Database Files ###
+data/
+*.db
+*.trace.db

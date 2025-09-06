@@ -22,4 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByLoginId(String loginId);
     
     boolean existsByLoginId(String loginId);
+    
+    // 튜토리얼용 메서드 추가
+    boolean existsByNicknameAndIdNot(String nickname, Long id);
 }
