@@ -25,6 +25,7 @@ public class User {
     private Long id;
 
     @Column(nullable = false)
+    @Builder.Default
     private String role = "ROLE_USER";
 
     @Column(unique = true, nullable = false)

@@ -35,7 +35,7 @@ public class Card {
     private byte[] embedding;  // float[]를 byte[]로 변환하여 저장
 
     // 저장할 때 float[] → byte[]
-    public void setEmbedding(float[] embedding) {
+    public void settingEmbedding(float[] embedding) {
         if (embedding == null) {
             this.embedding = null;
             return;

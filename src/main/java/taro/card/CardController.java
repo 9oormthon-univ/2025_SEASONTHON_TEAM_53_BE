@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import taro.auth.CustomUserDetails;
 import taro.userdraw.UserDrawService;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 
@@ -16,6 +18,12 @@ public class CardController {
     private final CardService cardService;
     private final UserDrawService userDrawService;
     private final CardRepository cardRepository;
+
+    @PostMapping("/bulk")
+    public ResponseEntity<String> saveCards(@RequestBody List<CardCreateRequest> requests) {
+        cardService.saveCards(requests);
+        return ResponseEntity.ok("Cards saved with embeddings!");
+    }
 
     @Operation(summary = "샘플 카드 삽입", description = "요청 없이 예시 한 건을 삽입합니다.")
     @PostMapping("/seed-one")

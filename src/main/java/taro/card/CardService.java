@@ -119,6 +119,27 @@ public class CardService {
         return saved;
     }
 
+    public void saveCards(List<CardCreateRequest> requests) {
+        for (CardCreateRequest req : requests) {
+            Card card = Card.builder()
+                    .name(req.getName())
+                    .description(req.getDescription())
+                    .strength(req.getStrength())
+                    .type(req.getCardType()) // "pre" -> PRE
+                    .question(req.getQuestion())
+                    .build();
+
+            // 임베딩 생성 후 저장
+            byte[] embedding = embeddingService.getEmbeddingBytes(
+                    req.getName() + " " + req.getDescription() + " " + req.getQuestion()
+            );
+
+            card.setEmbedding(embedding);
+
+            cardRepository.save(card);
+        }
+    }
+
 
 
 }
