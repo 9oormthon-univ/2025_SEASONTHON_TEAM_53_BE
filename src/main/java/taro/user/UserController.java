@@ -28,7 +28,7 @@ public class UserController {
     private final UserDrawService userDrawService;
 
 
-    @Operation(summary = "강점사항 제출")
+    @Operation(summary = "자소서 제출")
     @PostMapping("/resume")
     public ResponseEntity<Void> saveResume(@RequestBody ResumeRequest request,
                                            @AuthenticationPrincipal CustomUserDetails userDetails) {

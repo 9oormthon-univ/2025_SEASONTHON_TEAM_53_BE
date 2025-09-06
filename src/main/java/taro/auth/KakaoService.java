@@ -68,24 +68,15 @@ public class KakaoService {
                 .nickname(req.getNickName())
                 .kakaoEmail(req.getKakaoEmail())
                 .role(role)
-                .jobCategory(req.getJobCategory())
-                .personality(req.getPersonality())
+                .ie(req.getIe())
+                .ns(req.getNs())
+                .ft(req.getFt())
+                .jp(req.getJp())
                 .build();
-
-
 
         TokenDto token = generateTokenFor(user);
         user.setRefreshToken(token.getRefreshToken());
         userRepository.save(user);
-
-        user.setJobCategory(req.getJobCategory());
-        user.setPersonality(req.getPersonality());
-
-        // Enum → 문자열로 변환 후 임베딩
-        String text = "JobCategory: " + req.getJobCategory().name() + ", Personality: " + req.getJobCategory().name();
-
-        byte[] embeddingBytes = embeddingService.getEmbeddingBytes(text);
-        user.setPersonalEmbedding(embeddingBytes);
 
         return token;
     }
@@ -131,6 +122,27 @@ public class KakaoService {
             return accessTokenNode.asText();
         } catch (Exception e) {
             throw new IllegalStateException("카카오 토큰 파싱 실패", e);
+        }
+    }
+
+
+    private String getKakaoId(String accessToken) {
+        String url = "https://kapi.kakao.com/v2/user/me";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(accessToken);
+        HttpEntity<Void> request = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, request, String.class);
+
+
+        System.out.println("사용자 정보 요청 토큰: "+ accessToken);
+        System.out.println("카카오 사용자 정보 응답 바디: "+ response.getBody());
+
+        try {
+            JsonNode json = objectMapper.readTree(response.getBody());
+            return json.get("id").asText();
+        } catch (Exception e) {
+            throw new IllegalStateException("카카오 사용자 정보 파싱 실패", e);
         }
     }
 

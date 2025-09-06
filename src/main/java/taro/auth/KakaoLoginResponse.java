@@ -14,7 +14,7 @@ public class KakaoLoginResponse {
     @Schema(description = "가입 여부", example = "true")
     private boolean isSignedUp;
 
-    @Schema(description = "카카오 이메일", example = "test@kakao.com")
+    @Schema(description = "카카오 이메일")
     private String kakaoEmail;
 
     @Schema(description = "JWT 토큰 정보 (가입된 사용자만 존재)")

@@ -50,9 +50,6 @@ public class CardService {
 
         List<float[]> allEmbeddings = new ArrayList<>();
 
-        float[] personal = embeddingService.bytesToFloatArray(user.getPersonalEmbedding());
-        if (personal != null) allEmbeddings.add(personal);
-
         float[] textEmb = embeddingService.bytesToFloatArray(user.getTextEmbedding());
         if (textEmb != null) allEmbeddings.add(textEmb);
 
@@ -88,8 +85,7 @@ public class CardService {
 
         List<float[]> allEmbeddings = new ArrayList<>();
 
-        float[] personal = embeddingService.bytesToFloatArray(user.getPersonalEmbedding());
-        if (personal != null) allEmbeddings.add(personal);
+
 
         float[] textEmb = embeddingService.bytesToFloatArray(user.getTextEmbedding());
         if (textEmb != null) allEmbeddings.add(textEmb);

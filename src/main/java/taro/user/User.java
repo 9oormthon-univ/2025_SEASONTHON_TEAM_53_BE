@@ -30,22 +30,19 @@ public class User {
     @Column(unique = true, nullable = false)
     private String kakaoEmail;
 
+    @Column
     private String nickname;
-
-
-    @Enumerated(EnumType.STRING)
-    private JobCategory jobCategory;
-
-    @Enumerated(EnumType.STRING)
-    private Personality personality;
-
 
     @Column(name = "refresh_token")
     private String refreshToken;
 
-    // 1. 개인 특성 임베딩 (직무+성향)
-    @Lob
-    private byte[] personalEmbedding;
+    private IE ie;
+
+    private NS ns;
+
+    private FT ft;
+
+    private JP jp;
 
     // 2. 자소서 기반 임베딩
     @Lob

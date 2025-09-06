@@ -10,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 import taro.auth.CustomUserDetails;
 import taro.auth.TokenDto;
-import taro.auth.UserDetailsImpl;
 import taro.repository.UserRepository;
 import taro.user.User;
 
